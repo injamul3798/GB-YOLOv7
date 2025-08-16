@@ -1,0 +1,11 @@
+ 
+
+train: /content/drive/MyDrive/GB-YOLOv7/yolov7/datayolo8/train/images
+val: /content/drive/MyDrive/GB-YOLOv7/yolov7/datayolo8/val/images
+ 
+
+# number of classes
+nc: 3
+
+# class names
+names: ['nml','benign','malignant']
