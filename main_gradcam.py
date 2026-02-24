@@ -48,11 +48,21 @@ def get_heatmap_and_overlay(mask, res_img):
     if mask.ndim == 3:
         mask = mask.squeeze(0)  # [H,W]
 
-    heat = mask.mul(255).add(0.5).clamp(0, 255).detach().cpu().numpy().astype(np.uint8)
+    cam = mask.detach().cpu().numpy().astype(np.float32)
+    cam = np.clip(cam, 0.0, 1.0)
+    # Remove low-activation haze so background keeps original appearance.
+    thr = 0.30
+    cam = np.maximum(cam - thr, 0.0) / (1.0 - thr + 1e-6)
+    heat = (cam * 255.0).astype(np.uint8)
 
     heatmap = cv2.applyColorMap(heat, cv2.COLORMAP_JET)
     # CAM is produced at model/input resolution; resize to original image for overlay.
     if heatmap.shape[:2] != res_img.shape[:2]:
+        cam = cv2.resize(
+            cam,
+            (res_img.shape[1], res_img.shape[0]),
+            interpolation=cv2.INTER_LINEAR,
+        )
         heatmap = cv2.resize(
             heatmap,
             (res_img.shape[1], res_img.shape[0]),
@@ -61,18 +71,26 @@ def get_heatmap_and_overlay(mask, res_img):
     heatmap = heatmap.astype(np.float32) / 255.0
 
     base_img = res_img.astype(np.float32) / 255.0
-    overlay = base_img + heatmap
-    overlay = overlay / (overlay.max() + 1e-6)
+    alpha = cam[..., None] * 0.75
+    overlay = base_img * (1.0 - alpha) + heatmap * alpha
     overlay = (overlay * 255).astype(np.uint8)
     return overlay
 
 
 def draw_box(img, box, label=None, color=(0, 255, 0)):
     x1, y1, x2, y2 = box
-    cv2.rectangle(img, (x1, y1), (x2, y2), color, 2)
+    cv2.rectangle(img, (x1, y1), (x2, y2), color, 3)
     if label:
-        cv2.putText(img, label, (x1, max(0, y1 - 8)),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        font_scale = 1.0
+        text_thickness = 2
+        (tw, th), baseline = cv2.getTextSize(label, font, font_scale, text_thickness)
+        y_text = max(th + baseline, y1 - 6)
+        # Draw black outline first for readability over heatmaps.
+        cv2.putText(img, label, (x1, y_text),
+                    font, font_scale, (0, 0, 0), text_thickness + 2, cv2.LINE_AA)
+        cv2.putText(img, label, (x1, y_text),
+                    font, font_scale, (255, 255, 255), text_thickness, cv2.LINE_AA)
     return img
 
 
