@@ -1,5 +1,11 @@
-## Precision in Early Diagnosis of Gallbladder Cancer through an Integration of Advanced Imaging with Attention-Powered YOLOv7 Architecture
+## Paper Title: Precision in Early Diagnosis of Gallbladder Cancer through an Integration of Advanced Imaging with Attention-Powered YOLOv7 Architecture
+## 📌 Overview
 
+This repository contains the official implementation of **GB-YOLOv7**, a novel deep learning framework designed for early detection of gallbladder cancer using advanced imaging and attention-enhanced object detection.
+
+GB-YOLOv7 extends the baseline YOLOv7 architecture by integrating powerful attention mechanisms and image preprocessing techniques to significantly improve detection accuracy and interpretability.
+
+## 📌 Abstraction
 This study presents an advanced modification of the You Only Look Once version 7 (YOLOv7) model named
 Gallbladder YOLOv7 (GB-YOLOv7). GB-YOLOv7 integrates a Normalization-based Attention Module (NAM) and a
 Global Attention Mechanism (GAM) into the backbone and head architecture. Several image preprocessing
@@ -13,3 +19,21 @@ Average Precision of 94.0%, and a Specificity of 96.2% (vs YOLOv11's 90.6%). GB-
 vs You Only Look Once version 9 (YOLOv9)'s 81.4%), while maintaining greater parameter efficiency (24.34M vs
 YOLOv7's 36.58M), showcasing its potential as a cutting-edge tool for more effective gallbladder cancer
 detection
+
+## 🚀 Code Run Instructions
+
+1. First, clone the repository:
+   https://github.com/injamul3798/GB-YOLOv7
+
+2. Navigate to the main directory of the project.
+
+3. Open the notebook file:
+   **`GBCU_final_code_with_gradecam.ipynb`**
+
+4. Follow the step-by-step instructions provided inside the notebook to run the code successfully.
+
+---
+
+**Author:** Md. Injamul Haque
+
+**Role:** AI/ML Researcher & Engineer
