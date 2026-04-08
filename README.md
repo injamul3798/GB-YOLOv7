@@ -1,4 +1,4 @@
-## Paper Title: Precision in Early Diagnosis of Gallbladder Cancer through an Integration of Advanced Imaging with Attention-Powered YOLOv7 Architecture
+## Paper Title: Attention-driven deep object detection for improved gallbladder cancer diagnosis from ultrasound images
 ## 📌 Overview
 
 This repository contains the official implementation of **GB-YOLOv7**, a novel deep learning framework designed for early detection of gallbladder cancer using advanced imaging and attention-enhanced object detection.
