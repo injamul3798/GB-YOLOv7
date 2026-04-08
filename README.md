@@ -1,4 +1,6 @@
-## Paper Title: Attention-driven deep object detection for improved gallbladder cancer diagnosis from ultrasound images
+## 📌Paper Title and Link
+### **Attention-driven deep object detection for improved gallbladder cancer diagnosis from ultrasound images**
+##### Publish Paper Link: https://www.sciencedirect.com/science/article/pii/S0952197626010390
 ## 📌 Overview
 
 This repository contains the official implementation of **GB-YOLOv7**, a novel deep learning framework designed for early detection of gallbladder cancer using advanced imaging and attention-enhanced object detection.
